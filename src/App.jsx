@@ -10,6 +10,7 @@ import AssetsPage from './pages/assets'
 import AttendanceDetails from './pages/attendanceDetails'
 import Leaves from './pages/leaves'
 import LoginPage from './pages/LoginPage'
+import TestTable from './pages/table'
 const EmployeesPage = React.lazy(() => import("@/pages/employeePage"));
 // import { Button, buttonVariants } from '@/components/ui/button'
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/assets" element={<AssetsPage />} />
         <Route path='/login' element= {<LoginPage/>} />
         <Route path='/employees' element= {<EmployeesPage/>} />
+        <Route path= '/test' element= {<TestTable/>}/>
       </Routes>
     
     </>

@@ -1,18 +1,25 @@
-import { Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "@/components/site-header"
 import {
     SidebarInset,
     SidebarProvider,
-    SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { useEffect, useState } from "react";
 import { isSunday } from "date-fns";
 import { Badge } from "@/components/ui/badge";
+import DynamicBreadcrumb from "@/components/dynamicBreadCrumb";
+import TableComponent from "@/components/tanstack-table/TableComponent";
 
 
 function AttendanceDetails() {
     const [attendanceData, setAttendanceData] = useState([]);
+    const [columns, setColumns] = useState([
+        { header: "Employee ID", accessorKey: "employeeId" },
+        { header: "Status", accessorKey: "status" },
+        { header: "Clock In", accessorKey: "clockIn" },
+        { header: "Clock Out", accessorKey: "clockOut" },
+        { header: "Date", accessorKey: "date" },
+    ]);
     const [presentCount, setPresentCount] = useState(0);
     const [totalDays, setTotalDays] = useState(0);
     const [lateDays, setLateDays] = useState(0);
@@ -28,24 +35,28 @@ function AttendanceDetails() {
             const attendace = await fetch('http://localhost:3001/attendance');
             const data = await attendace.json();
             setAttendanceData(data);
+            setColumns(columns);
         }
         fetchData();
-        
+
     }, [])
+
+
+
     function isLate(clockInTime, threshold = '09:10') {
-        
+
         if (!clockInTime) null;
         const [inH, inM] = clockInTime.split(":").map(Number);
         const [tH, tM] = threshold.split(":").map(Number);
-        
-        
+
+
         return inH > tH || (inH === tH && inM > tM);
-        
+
     }
-    
+
     function calculateTotalHours() {
         let totalWork = 0
-        
+
         attendanceData.forEach((day) => {
             if (day.clockIn && day.clockOut) {
                 const [inH, inM] = day.clockIn.split(":").map(Number);
@@ -58,7 +69,7 @@ function AttendanceDetails() {
         const minutes = totalWork - (hours * 60);
         return { hours, minutes }
     }
-    
+
     useEffect(() => {
         console.log(attendanceData);
         const count = attendanceData.filter(day => day.status === "Present").length;
@@ -77,16 +88,39 @@ function AttendanceDetails() {
 
     return (
         <SidebarProvider
-                        className="bg-background w-screen min-w-full"
+                        className="flex h-screen w-full"
                         defaultOpen
                         defaultInsetOpen
-                        defaultVariant="floating"
                     >
-                        <AppSidebar variant="floating" />
-                        <SidebarInset className="border border-border rounded-3xl w-full mr-8 bg-background">
-                <SiteHeader title="Attendance Details" btnText="View Source" />
-                <Badge className="w-full h-10 text-lg bg-accent" variant= "outline">Present: {presentCount} Total Days: {totalDays} Late: {lateDays} Hours Worked: {totalHoursWorked.hours}</Badge>
-                <Table className={"m-4 overflow-x-clip"}>
+                        {/* Sidebar */}
+                        <AppSidebar />
+        
+                        {/* Main Content */}
+                        <div className="flex flex-col flex-1">
+        
+        
+                            <SiteHeader>
+                            </SiteHeader>
+        
+                            <SidebarInset className="flex flex-col border border-border rounded-3xl bg-background">
+                                <div className='px-10 py-2'>
+                                    <DynamicBreadcrumb />
+                                </div>
+                <Badge className="w-full h-10 text-lg bg-accent" variant="outline">Present: {presentCount} Total Days: {totalDays} Late: {lateDays} Hours Worked: {totalHoursWorked.hours}</Badge>
+                <TableComponent data={attendanceData} columns={columns} />
+            </SidebarInset>
+            </div>
+
+        </SidebarProvider>
+
+    )
+}
+
+export default AttendanceDetails;
+
+
+
+{/* <Table className={"m-4 overflow-x-clip"}>
                     <TableCaption>Total Days in 2025</TableCaption>
                     <TableHeader className={""}>
                         <TableRow>
@@ -100,9 +134,9 @@ function AttendanceDetails() {
                     </TableHeader>
                     <TableBody>
                         {
-                            attendanceData.map((day, index) => {
+                            attendanceData.map((day, index) => 
 
-                                return (
+                                 (
                                     <TableRow key={index}>
                                         <TableCell className="font-medium">
                                             {day.status}
@@ -121,15 +155,7 @@ function AttendanceDetails() {
                                         </TableCell>
                                     </TableRow>)
 
-                            })
+                            )
                         }
                     </TableBody>
-                </Table>
-            </SidebarInset>
-
-        </SidebarProvider>
-
-    )
-}
-
-export default AttendanceDetails;
+                </Table> */}

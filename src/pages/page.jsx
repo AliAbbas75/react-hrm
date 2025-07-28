@@ -1,6 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { DataTable } from "@/components/data-table"
 import { SectionCards } from "@/components/section-cards"
 import { SiteHeader } from "@/components/site-header"
 import {
@@ -9,6 +8,7 @@ import {
 } from "@/components/ui/sidebar"
 
 import { ChartPieInteractive } from '@/components/pie-chart'
+import DynamicBreadcrumb from "@/components/dynamicBreadCrumb"
 
 export default function Page() {
 
@@ -20,29 +20,39 @@ export default function Page() {
 
     return (
         <SidebarProvider
-            className="bg-background w-screen min-w-full"
+            className="flex h-screen w-full"
             defaultOpen
             defaultInsetOpen
-            defaultVariant="floating"
         >
-            <AppSidebar variant="floating" />
-            <SidebarInset className="border border-border rounded-3xl mr-8 w-full bg-background">
-                <SiteHeader title="Dashboard" btnText="View Source" />
+            {/* Sidebar */}
+            <AppSidebar />
 
-                <div className="@container/main flex flex-col gap-2 p-4">
-                    <div className="flex flex-col gap-4">
-                        <SectionCards />
-                        <div className="m-5">
-                            <ChartPieInteractive />
-                        </div>
-                        <div className="flex flex-col gap-4">
-                            <ChartAreaInteractive />
-                        </div>
+            {/* Main Content */}
+            <div className="flex flex-col flex-1">
 
+
+                <SiteHeader>
+                </SiteHeader>
+
+                <SidebarInset className="flex flex-col border border-border rounded-3xl bg-background">
+                    <div className='px-10 py-2'>
+                        <DynamicBreadcrumb />
                     </div>
-                </div>
+                    <div className="@container/main flex flex-col gap-2 p-4">
+                        <div className="flex flex-col gap-4">
+                            <SectionCards />
+                            <div className="m-5">
+                                <ChartPieInteractive />
+                            </div>
+                            <div className="flex flex-col gap-4">
+                                <ChartAreaInteractive />
+                            </div>
 
-            </SidebarInset>
+                        </div>
+                    </div>
+
+                </SidebarInset>
+                </div>
         </SidebarProvider>
     )
 }

@@ -1,20 +1,17 @@
-import { Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { AppSidebar } from "@/components/app-sidebar"
-import { SiteHeader } from "@/components/site-header"
-import {
-    SidebarInset,
-    SidebarProvider,
-    SidebarTrigger,
-} from "@/components/ui/sidebar"
 import { isSunday, isSaturday, format } from "date-fns";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+import React from 'react'
+const TableComponent = React.lazy(()=>import("@/components/tanstack-table/TableComponent"))
 
 
 function HolidayTable({ selectedMonth = 0 }) {
 
     const [month, setMonth] = useState(0);
     const [holidays, setHolidays] = useState([]);
+    const [columns,setColumns] = useState([
+        {header:"Day", accessorkey: "Sunday"||"Saturday"},
+        {header:"Date", accessorkey: "date"}
+    ]);
 
     useEffect(() => {
             setMonth(selectedMonth);
@@ -47,7 +44,15 @@ function HolidayTable({ selectedMonth = 0 }) {
 
     return (
 
-                <Table className={"m-4"}>
+                <TableComponent data={holidays} columns={columns}/>
+           
+    );
+}
+
+export default HolidayTable;
+
+
+{/* <Table className={"m-4"}>
                     <TableCaption>Total Days in 2025</TableCaption>
                     <TableHeader className={""}>
                         <TableRow>
@@ -72,12 +77,4 @@ function HolidayTable({ selectedMonth = 0 }) {
                             })
                         }
                     </TableBody>
-                </Table>
-
-           
-    );
-}
-
-export default HolidayTable;
-
-
+                </Table> */}

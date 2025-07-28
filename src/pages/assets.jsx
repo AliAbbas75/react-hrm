@@ -1,41 +1,72 @@
 import React, { Suspense } from "react"
 import { Button } from "@/components/ui/button" // small, keep static
-import { useAssetStore } from "@/store/assetStore"
+import DynamicBreadcrumb from "@/components/dynamicBreadCrumb"
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
+import { useState, useEffect } from "react"
+
+import { Dialog, DialogTrigger, DialogContent,DialogTitle } from "@/components/ui/dialog"
 import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "@/components/site-header"
+import TableComponent from "@/components/tanstack-table/TableComponent"
 
-const AssetTable = React.lazy(() => import("@/components/AssetTable"))
 const AssetForm = React.lazy(() => import("@/components/AssetForm"))
-const AssetFilter = React.lazy(() => import("@/components/AssetFilter"))
 
 export default function AssetsPage() {
+
+    const [assets, setAssets] = useState([])
+    const [columns, setColumns] = useState([
+        { header: "Name", accessorKey: "name" },
+        { header: "Type", accessorKey: "type" },
+        { header: "Status", accessorKey: "status" },
+        { header: "Assigned To", accessorKey: "assignedTo" },
+        { header: "Action", accessorKey: "action" },
+    ])
+    useEffect(() => {
+
+        async function fetchData() {
+            const apiAssetsDetail = await fetch('http://localhost:3001/assets');
+            const data = await apiAssetsDetail.json();
+            setAssets(data);
+        }
+        fetchData();
+    }, [])
+
     return (
         <Suspense fallback={<div></div>}>
             <SidebarProvider
-                className="bg-background w-screen min-w-full"
-                defaultOpen
-                defaultInsetOpen
-                defaultVariant="floating"
-            >
-                <AppSidebar variant="floating" />
-                <SidebarInset className="border border-border rounded-3xl mr-8 w-full bg-background">
-                    <SiteHeader title="Assets" btnText="View Source" />
-                    <div className="p-6 space-y-4">
+                            className="flex h-screen w-full"
+                            defaultOpen
+                            defaultInsetOpen
+                        >
+                            {/* Sidebar */}
+                            <AppSidebar />
+            
+                            {/* Main Content */}
+                            <div className="flex flex-col flex-1">
+            
+            
+                                <SiteHeader>
+                                </SiteHeader>
+            
+                                <SidebarInset className="flex flex-col border border-border rounded-3xl bg-background">
+                                    <div className='px-10 py-2'>
+                                        <DynamicBreadcrumb />
+                                    </div>
+                    <TableComponent data={assets} columns={columns} actions={
+
                         <Dialog>
+                            <DialogTitle title ="Add assets"/>
                             <DialogTrigger asChild>
                                 <Button>Add Asset</Button>
                             </DialogTrigger>
-                            <DialogContent>
+                            <DialogContent aria-describedby ="asset-form">
                                 <AssetForm />
                             </DialogContent>
                         </Dialog>
-                        <AssetFilter />
-                        <AssetTable />
-                    </div>
+
+                    } />
                 </SidebarInset>
+                </div>
             </SidebarProvider>
         </Suspense>
     )

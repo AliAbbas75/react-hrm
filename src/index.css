@@ -119,13 +119,13 @@
   --chart-3: oklch(0.6056 0.2189 292.7172);
   --chart-4: oklch(0.7686 0.1647 70.0804);
   --chart-5: oklch(0.6959 0.1491 162.4796);
-  --sidebar: oklch(0.9911 0 0);
+  --sidebar: oklch(100% 0.00011 271.152);
   --sidebar-foreground: oklch(0.5452 0 0);
   --sidebar-primary: oklch(0.8348 0.1302 160.9080);
   --sidebar-primary-foreground: oklch(0.2626 0.0147 166.4589);
   --sidebar-accent: oklch(0.9461 0 0);
   --sidebar-accent-foreground: oklch(0.2435 0 0);
-  --sidebar-border: oklch(0.9037 0 0);
+  --sidebar-border: oklch(84.255% 0.01341 17.032);
   --sidebar-ring: oklch(0.8348 0.1302 160.9080);
   --font-sans: Outfit, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -141,6 +141,7 @@
   --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.43);
   --tracking-normal: 0.025em;
   --spacing: 0.25rem;
+  --header-height: 5rem
 }
 
 .dark {

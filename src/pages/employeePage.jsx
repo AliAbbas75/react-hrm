@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Table, TableHeader, TableRow, TableHead, TableCell, TableBody } from "@/components/ui/table";
+import React, { Suspense, useEffect, useState } from 'react';
+
+const TableComponent = React.lazy(() => import("@/components/tanstack-table/TableComponent"))
+
 import { Badge } from "@/components/ui/badge";
 import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "@/components/site-header"
@@ -10,17 +12,27 @@ import {
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuLabel,
     DropdownMenuRadioGroup,
     DropdownMenuRadioItem,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
 import { Button } from '@/components/ui/button';
+import DynamicBreadcrumb from '@/components/dynamicBreadCrumb';
 
 function EmployeesPage() {
     const [employees, setEmployees] = useState([])
+    const [columns, setColumns] = useState([
+        { header: "Id", accessorKey: "id" },
+        { header: "Name", accessorKey: "name" },
+        { header: "Report To", accessorKey: "reportTo" },
+        { header: "Working Email", accessorKey: "workingEmail" },
+        { header: "Department", accessorKey: "department" },
+        { header: "Location", accessorKey: "location" },
+        { header: "Duration", accessorKey: "duration" },
+        { header: "Status", accessorKey: "status" },
+        { header: "Action", accessorKey: "action" },
+    ])
     const [filterEmployees, setFilterEmployees] = useState([])
     const [filter, setFilter] = useState("")
     useEffect(() => {
@@ -33,6 +45,8 @@ function EmployeesPage() {
         }
         fetchData();
     }, [])
+
+
 
     useEffect(() => {
         if (filter === "Active") {
@@ -59,64 +73,80 @@ function EmployeesPage() {
 
 
     return (
-        <SidebarProvider
-                        className="bg-background w-screen min-w-full"
-                        defaultOpen
-                        defaultInsetOpen
-                        defaultVariant="floating"
-                    >
-                        <AppSidebar variant="floating" />
-                        <SidebarInset className="border border-border rounded-3xl mr-8 w-full bg-background">
-                
-                <SiteHeader title="Employees" btnText="View Source" />
+        <>
+            <SidebarProvider
+                className="flex h-screen w-full"
+                defaultOpen
+                defaultInsetOpen
+            >
+                {/* Sidebar */}
+                <AppSidebar />
 
-                <div className='flex w-full justify-end items-end px-5 py-2'>
-                    <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline">Filter</Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuRadioGroup value={filter} onValueChange={setFilter}>
-                            <DropdownMenuRadioItem value="Active">Active</DropdownMenuRadioItem>
-                            <DropdownMenuRadioItem value="">Reset</DropdownMenuRadioItem>
-                        </DropdownMenuRadioGroup>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                {/* Main Content */}
+                <div className="flex flex-col flex-1">
+
+
+                    <SiteHeader>
+                    </SiteHeader>
+
+                    <SidebarInset className="flex flex-col border border-border rounded-3xl bg-background">
+                        <div className='px-10 py-2'>
+                            <DynamicBreadcrumb />
+                        </div>
+                        <TableComponent
+                            data={employees}
+                            columns={columns}
+                            actions={
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button variant="outline">Filter</Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent>
+                                        <DropdownMenuRadioGroup value={filter} onValueChange={setFilter}>
+                                            <DropdownMenuRadioItem value="Active">Active</DropdownMenuRadioItem>
+                                            <DropdownMenuRadioItem value="">Reset</DropdownMenuRadioItem>
+                                        </DropdownMenuRadioGroup>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            }
+                        />
+                    </SidebarInset>
                 </div>
-
-                <Table>
-                    <TableHeader>
-                        <TableRow className={""}>
-                            <TableHead className={"text-center font-bold"}>Name</TableHead>
-                            <TableHead className={"text-center font-bold"}>Report To</TableHead>
-                            <TableHead className={"text-center font-bold"}>Working Email</TableHead>
-                            <TableHead className={"text-center font-bold"}>Department</TableHead>
-                            <TableHead className={"text-center font-bold"}>Location</TableHead>
-                            <TableHead className={"text-center font-bold"}>Status</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {filterEmployees.map((emp) => (
-                            <TableRow key={emp.id}>
-                                <TableCell>{emp.name}</TableCell>
-                                <TableCell>{emp.reportTo}</TableCell>
-                                <TableCell>{emp.workingEmail}</TableCell>
-                                <TableCell>{emp.department}</TableCell>
-                                <TableCell>{emp.location}</TableCell>
-                                <TableCell>
-                                    <Badge variant={emp.status === "Active" ? "success" : "destructive"}>
-                                        {emp.status}
-                                    </Badge>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-
-            </SidebarInset>
-        </SidebarProvider>
+            </SidebarProvider>
+        </>
 
     )
 }
 
 export default EmployeesPage;
+
+
+
+//  <Table>
+//                     <TableHeader>
+//                         <TableRow className={""}>
+//                             <TableHead className={"text-center font-bold"}>Name</TableHead>
+//                             <TableHead className={"text-center font-bold"}>Report To</TableHead>
+//                             <TableHead className={"text-center font-bold"}>Working Email</TableHead>
+//                             <TableHead className={"text-center font-bold"}>Department</TableHead>
+//                             <TableHead className={"text-center font-bold"}>Location</TableHead>
+//                             <TableHead className={"text-center font-bold"}>Status</TableHead>
+//                         </TableRow>
+//                     </TableHeader>
+//                     <TableBody>
+//                         {filterEmployees.map((emp) => (
+//                             <TableRow key={emp.id}>
+//                                 <TableCell>{emp.name}</TableCell>
+//                                 <TableCell>{emp.reportTo}</TableCell>
+//                                 <TableCell>{emp.workingEmail}</TableCell>
+//                                 <TableCell>{emp.department}</TableCell>
+//                                 <TableCell>{emp.location}</TableCell>
+//                                 <TableCell>
+//                                     <Badge variant={emp.status === "Active" ? "success" : "destructive"}>
+//                                         {emp.status}
+//                                     </Badge>
+//                                 </TableCell>
+//                             </TableRow>
+//                         ))}
+//                     </TableBody>
+//                 </Table>

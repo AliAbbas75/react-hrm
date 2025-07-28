@@ -50,7 +50,7 @@ function SidebarProvider({
   style,
   children,
   defaultInsetOpen,
-  defaultVariant="floating",
+  defaultVariant="inset",
   ...props
 }) {
   const isMobile = useIsMobile()

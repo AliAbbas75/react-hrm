@@ -8,12 +8,12 @@ import {
     DropdownMenuRadioGroup,
     DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu"
+import DynamicBreadcrumb from "@/components/dynamicBreadCrumb";
 
 import { AppSidebar } from "@/components/app-sidebar"
 import {
     SidebarInset,
     SidebarProvider,
-    SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { SiteHeader } from "@/components/site-header";
 
@@ -32,14 +32,24 @@ function Holidays() {
     return (
         <>
             <SidebarProvider
-                className="bg-background w-screen min-w-full"
-                defaultOpen
-                defaultInsetOpen
-                defaultVariant="floating"
-            >
-                <AppSidebar variant="floating" />
-                <SidebarInset className="border border-border rounded-3xl mr-8 w-full bg-background">
-                    <SiteHeader title="Holidays" btnText="View Source" />
+                            className="flex h-screen w-full"
+                            defaultOpen
+                            defaultInsetOpen
+                        >
+                            {/* Sidebar */}
+                            <AppSidebar />
+            
+                            {/* Main Content */}
+                            <div className="flex flex-col flex-1">
+            
+            
+                                <SiteHeader>
+                                </SiteHeader>
+            
+                                <SidebarInset className="flex flex-col border border-border rounded-3xl bg-background">
+                                    <div className='px-10 py-2'>
+                                        <DynamicBreadcrumb />
+                                    </div>
                     <div className="flex items-center justify-between p-4">
                         <DropdownMenu>
                             <DropdownMenuTrigger className="w-auto">
@@ -62,6 +72,7 @@ function Holidays() {
 
                     <HolidayTable selectedMonth={currentMonth} />
                 </SidebarInset>
+                </div>
             </SidebarProvider>
 
 

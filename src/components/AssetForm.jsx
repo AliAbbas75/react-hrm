@@ -1,14 +1,19 @@
-import { useAssetStore } from "@/store/assetStore"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import axios from 'axios'
 
 export default function AssetForm() {
-  const { addAsset } = useAssetStore()
-  const [formData, setFormData] = useState({ name: "", type: "", status: "Available", assignedTo: "" })
+  const [formData, setFormData] = useState({ name: "", type: "", status: "", assignedTo: "" })
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  async function addAsset(newAsset){
+    const res = await axios.post('http://localhost:3001/assets',newAsset);
+    const addedAsset = res.status
+    console.log ("Adding asset:", addedAsset);
   }
 
   const handleSubmit = (e) => {

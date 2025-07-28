@@ -530,5 +530,42 @@
       "action": "View",
       "id": "284b"
     }
+  ],
+  "departments": [
+    {
+      "id": "3",
+      "name": "Sales",
+      "employeeCount": 30
+    },
+    {
+      "id": "5",
+      "name": "Finance",
+      "employeeCount": 15
+    },
+    {
+      "id": "6",
+      "name": "Customer Support",
+      "employeeCount": 25
+    },
+    {
+      "id": "8",
+      "name": "Legal",
+      "employeeCount": 7
+    },
+    {
+      "id": "10",
+      "name": "Administration",
+      "employeeCount": 8
+    },
+    {
+      "id": "e7d6",
+      "name": "Test",
+      "employeeCount": 12
+    },
+    {
+      "id": "f9f4",
+      "name": "Development",
+      "employeeCount": 30
+    }
   ]
 }

@@ -5,12 +5,13 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Page from './pages/page'
 import {Routes,Route } from 'react-router-dom'
-import Holidays from './pages/hoildays'
-import AssetsPage from './pages/assets'
-import AttendanceDetails from './pages/attendanceDetails'
-import Leaves from './pages/leaves'
-import LoginPage from './pages/LoginPage'
-import TestTable from './pages/table'
+const Designation = React.lazy(()=>import("@/pages/designation"))
+const Holidays = React.lazy(()=>import("@/pages/hoildays"))
+const AssetsPage = React.lazy(()=>import("@/pages/assets"))
+const AttendanceDetails = React.lazy(()=>import("@/pages/attendanceDetails"))
+const Leaves = React.lazy(()=>import("@/pages/leaves"))
+const LoginPage = React.lazy(()=>import("@/pages/LoginPage"))
+const Department = React.lazy(()=>import("@/pages/departments"))
 const EmployeesPage = React.lazy(() => import("@/pages/employeePage"));
 // import { Button, buttonVariants } from '@/components/ui/button'
 
@@ -27,8 +28,10 @@ function App() {
         <Route path="/leaves" element={<Leaves />} />
         <Route path="/assets" element={<AssetsPage />} />
         <Route path='/login' element= {<LoginPage/>} />
+        <Route path="/department" element={<Department/>}/>
         <Route path='/employees' element= {<EmployeesPage/>} />
-        <Route path= '/test' element= {<TestTable/>}/>
+        <Route path='/designation' element= {<Designation/>} />
+        <Route path= '/test' element= {<></>}/>
       </Routes>
     
     </>

@@ -1,13 +1,13 @@
+// import { ChartAreaInteractive } from "@/components/chart-area-interactive"
+// import { SectionCards } from "@/components/section-cards"
+// import { ChartPieInteractive } from '@/components/pie-chart'
 import { AppSidebar } from "@/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { SectionCards } from "@/components/section-cards"
 import { SiteHeader } from "@/components/site-header"
 import {
     SidebarInset,
     SidebarProvider,
 } from "@/components/ui/sidebar"
 
-import { ChartPieInteractive } from '@/components/pie-chart'
 import DynamicBreadcrumb from "@/components/dynamicBreadCrumb"
 
 export default function Page() {
@@ -38,7 +38,7 @@ export default function Page() {
                     <div className='px-10 py-2'>
                         <DynamicBreadcrumb />
                     </div>
-                    <div className="@container/main flex flex-col gap-2 p-4">
+                    {/* <div className="@container/main flex flex-col gap-2 p-4">
                         <div className="flex flex-col gap-4">
                             <SectionCards />
                             <div className="m-5">
@@ -49,7 +49,7 @@ export default function Page() {
                             </div>
 
                         </div>
-                    </div>
+                    </div> */}
 
                 </SidebarInset>
                 </div>

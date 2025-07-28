@@ -19,7 +19,6 @@ export default function AssetsPage() {
         { header: "Type", accessorKey: "type" },
         { header: "Status", accessorKey: "status" },
         { header: "Assigned To", accessorKey: "assignedTo" },
-        { header: "Action", accessorKey: "action" },
     ])
     useEffect(() => {
 
@@ -52,7 +51,7 @@ export default function AssetsPage() {
                                     <div className='px-10 py-2'>
                                         <DynamicBreadcrumb />
                                     </div>
-                    <TableComponent data={assets} columns={columns} actions={
+                    <TableComponent data={assets} columns={columns} actions={()=>(
 
                         <Dialog>
                             <DialogTitle title ="Add assets"/>
@@ -63,6 +62,7 @@ export default function AssetsPage() {
                                 <AssetForm />
                             </DialogContent>
                         </Dialog>
+                    )
 
                     } />
                 </SidebarInset>

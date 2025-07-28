@@ -15,7 +15,15 @@ const TableComponent = ({ data, columns,actions }) => {
 
   const table = useReactTable({
     data,
-    columns,
+    columns:[
+      ...columns,
+      {
+        id: "actions",
+        header: "Actions",
+        cell: ({ row }) => actions?.(row), // Call the function with row
+      },
+    ],
+    
     state: {
       globalFilter,
       sorting,
@@ -38,11 +46,6 @@ const TableComponent = ({ data, columns,actions }) => {
           onChange={(e) => setGlobalFilter(e.target.value)}
           placeholder="Search..."
           className="mb-4 px-2 py-1 border border-gray-300 rounded" />
-          {/* 👇 Render Actions (if any) */}
-          {actions && (
-              <div className="">{actions}</div>
-           
-          )}
         </div>
 
         <Table className={"m-4 overflow-x-clip"}>

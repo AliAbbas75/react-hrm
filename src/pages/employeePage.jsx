@@ -2,7 +2,6 @@ import React, { Suspense, useEffect, useState } from 'react';
 
 const TableComponent = React.lazy(() => import("@/components/tanstack-table/TableComponent"))
 
-import { Badge } from "@/components/ui/badge";
 import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "@/components/site-header"
 import {
@@ -96,19 +95,6 @@ function EmployeesPage() {
                         <TableComponent
                             data={employees}
                             columns={columns}
-                            actions={
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="outline">Filter</Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent>
-                                        <DropdownMenuRadioGroup value={filter} onValueChange={setFilter}>
-                                            <DropdownMenuRadioItem value="Active">Active</DropdownMenuRadioItem>
-                                            <DropdownMenuRadioItem value="">Reset</DropdownMenuRadioItem>
-                                        </DropdownMenuRadioGroup>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                            }
                         />
                     </SidebarInset>
                 </div>

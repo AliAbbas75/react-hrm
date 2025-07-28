@@ -4,23 +4,29 @@ import axios from "axios"
 import { Input } from "@/components/ui/Input"
 import { Label } from "@/components/ui/Label"
 
-function DepartmentForm() {
+function AddForm({endpoint}) {
   const { register, handleSubmit, reset } = useForm()
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:3001/departments", data)
-      console.log("Department added:", response.data)
-      reset() // Clear form
+      if (endpoint) {
+        console.log ("Current Endpoint:" ,endpoint)
+        const response = await axios.post(`http://localhost:3001/${endpoint}`, data)
+        console.log("Department added:", response.data)
+        reset()
+      } 
+      else{
+        console.log("Endpoint Error",endpoint);
+      }
     } catch (error) {
-      console.error("Error posting department:", error)
+      console.error(`Error posting ${endpoint}`, error)
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-md">
       <div>
-        <Label className="block font-medium mb-1">Department Name:</Label>
+        <Label className="block font-medium mb-1">Name:</Label>
         <Input
           {...register("name")}
           placeholder="e.g. Engineering"
@@ -40,10 +46,10 @@ function DepartmentForm() {
       </div>
 
       <button type="submit" className="bg-foreground text-white py-2 px-4 rounded">
-        Add Department
+        Add
       </button>
     </form>
   )
 }
 
-export default DepartmentForm
+export default AddForm

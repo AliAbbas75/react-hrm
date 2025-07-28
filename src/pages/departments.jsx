@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import DynamicBreadcrumb from "@/components/dynamicBreadCrumb"
 import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import React, { useState, useEffect } from "react"
-import DepartmentForm from "@/components/department/DepartmentForm"
+import AddForm from "@/components/department/AddForm"
 import UpdateForm from "@/components/department/UpdateForm"
 import { CircleXIcon, SquarePenIcon } from "lucide-react"
 import DeleteRow from "@/components/department/DeleteRow"
@@ -60,12 +60,13 @@ export default function Department() {
                                 <Button>Add Department</Button>
                             </DialogTrigger>
                             <DialogContent aria-describedby="department-form">
-                                <DepartmentForm />
+                                <AddForm endpoint= "departments"/>
 
                             </DialogContent>
                         </Dialog>
                         <UpdateForm
                             rowData={selectedRow}
+                            endpoint={"departments"}
                             onClose={() => setSelectedRow(null)}
                             onSuccess={() => {
                                 setSelectedRow(null)
@@ -75,6 +76,7 @@ export default function Department() {
                         <DeleteRow
                             rowData={deleteRow}
                             onClose={() => setDeleteRow(null)}
+                            endpoint={"departments"}
                             onSuccess={() => {
                                 setDeleteRow(null)
                                 refetch?.()

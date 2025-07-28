@@ -385,14 +385,14 @@
       "condition": "Good"
     },
     {
-      "id": 1753425600137,
+      "id": "1753425600137",
       "name": "Test",
       "type": "Test",
       "status": "Available",
       "assignedTo": "Ali"
     },
     {
-      "id": 1753425717326,
+      "id": "1753425717326",
       "name": "HP Zostro",
       "type": "Laptop",
       "status": "Available",
@@ -533,11 +533,6 @@
   ],
   "departments": [
     {
-      "id": "3",
-      "name": "Sales",
-      "employeeCount": 30
-    },
-    {
       "id": "5",
       "name": "Finance",
       "employeeCount": 15
@@ -558,14 +553,71 @@
       "employeeCount": 8
     },
     {
-      "id": "e7d6",
-      "name": "Test",
-      "employeeCount": 12
-    },
-    {
       "id": "f9f4",
       "name": "Development",
       "employeeCount": 30
+    },
+    {
+      "id": "2955",
+      "name": "Software Test",
+      "employeeCount": 19
+    },
+    {
+      "id": "2b90",
+      "name": "avacc",
+      "employeeCount": 12
+    }
+  ],
+  "designations": [
+    {
+      "id": "1",
+      "name": "Software Engineer",
+      "employeeCount": 18
+    },
+    {
+      "id": "2",
+      "name": "Project Manager",
+      "employeeCount": 5
+    },
+    {
+      "id": "3",
+      "name": "UI/UX Designer",
+      "employeeCount": 6
+    },
+    {
+      "id": "4",
+      "name": "QA Engineer",
+      "employeeCount": 7
+    },
+    {
+      "id": "5",
+      "name": "DevOps Engineer",
+      "employeeCount": 4
+    },
+    {
+      "id": "6",
+      "name": "Product Manager",
+      "employeeCount": 3
+    },
+    {
+      "id": "8",
+      "name": "Business Analyst",
+      "employeeCount": 5
+    },
+    {
+      "id": "9",
+      "name": "HR Specialist",
+      "employeeCount": 4
+    },
+    {
+      "id": "10",
+      "name": "Customer Support Agent",
+      "employeeCount": 10
+    },
+    {
+      "id": "9282",
+      "name": "Added and Updated",
+      "employeeCount": 66
     }
   ]
 }

@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button"
 import axios from "axios"
 import { useEffect } from "react"
 
-export default function DeleteRow({ rowData, onClose, onSuccess }) {
+export default function DeleteRow({ rowData, onClose, onSuccess,endpoint }) {
 
 
   const onDelete = async (data) => {
     try {
-      await axios.delete(`http://localhost:3001/departments/${rowData.id}`, data)
+      await axios.delete(`http://localhost:3001/${endpoint}/${rowData.id}`, data)
       onSuccess?.() // Notify parent to refresh or close dialog
       onClose()     // Close the dialog
     } catch (err) {

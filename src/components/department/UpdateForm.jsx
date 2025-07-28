@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import axios from "axios"
 import { useEffect } from "react"
 
-export default function UpdateForm({ rowData, onClose, onSuccess }) {
+export default function UpdateForm({ rowData, onClose, onSuccess,endpoint }) {
   const { register, handleSubmit, reset } = useForm()
 
   // Prefill form when rowData changes
@@ -17,7 +17,7 @@ export default function UpdateForm({ rowData, onClose, onSuccess }) {
 
   const onSubmit = async (data) => {
     try {
-      await axios.patch(`http://localhost:3001/departments/${rowData.id}`, data)
+      await axios.patch(`http://localhost:3001/${endpoint}/${rowData.id}`, data)
       onSuccess?.() // Notify parent to refresh or close dialog
       onClose()     // Close the dialog
     } catch (err) {
@@ -28,7 +28,7 @@ export default function UpdateForm({ rowData, onClose, onSuccess }) {
   return (
     <Dialog open={!!rowData} onOpenChange={onClose}>
       <DialogContent>
-        <DialogTitle>Edit Department</DialogTitle>
+        <DialogTitle>Edit</DialogTitle>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <Label htmlFor="name">Name</Label>

@@ -12,7 +12,7 @@ export default function RotatingIcon({className="",open}) {
       onClick={() => setRotated(!rotated)}
       className="cursor-pointer inline-block "
     >
-      <ChevronDownSquareIcon className={`h-5 w-5 ${className}`} />
+      <ChevronDown className={`h-5 w-5 ${className}`} />
     </motion.div>
   );
 }

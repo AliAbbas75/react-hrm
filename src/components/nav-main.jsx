@@ -49,14 +49,14 @@ export function NavMain({
         </SidebarMenu>
         
         <CollapsibleNavItem
-            itemLabel={"Assets"} mainIcon = {<MonitorIcon/>}
+            itemLabel={"Assets"} mainIcon = {<MonitorIcon className="w-4 h-4"/>}
             subItem={[
               { link: "/", icon: <BadgeDollarSignIcon />, title: 'Asset Type' },
               { link: "/assets", icon: <LayoutListIcon />, title: 'Asset Details' }
             ]} />
         
         <CollapsibleNavItem
-            itemLabel={"OffBoardings"} mainIcon = {<ShieldAlertIcon/>}
+            itemLabel={"OffBoardings"} mainIcon = {<ShieldAlertIcon className="w-4 h-4"/>}
             subItem={[
               { link: "/warnings", icon: <AlertOctagonIcon />, title: 'Warnings' },
               { link: "/resignations", icon: <LayoutListIcon />, title: 'Resignations' }
@@ -64,7 +64,7 @@ export function NavMain({
           
           {/* {Always Pass the array of object in order that you want the subItem to appear in} */}
           <CollapsibleNavItem
-            itemLabel={"Employees"} mainIcon = {<User2Icon/>}
+            itemLabel={"Employees"} mainIcon = {<User2Icon className="w-4 h-4"/>}
             subItem={[
               { link: "/designation", icon: <ShieldUserIcon />, title: 'Designations' },
               { link: "/department", icon: <Building2Icon />, title: 'Departments' }

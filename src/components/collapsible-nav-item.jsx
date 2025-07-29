@@ -14,11 +14,14 @@ export default function CollapsibleNavItem({ itemLabel, subItem, mainIcon }) {
                 <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
                         <SidebarMenuButton asChild>
-                            <div className="flex items-center gap-2 w-full cursor-pointer">
-                                {mainIcon}
-                                <p>{itemLabel}</p>
+                            <div className="flex items-center justify-between w-full cursor-pointer">
+                                <div className="flex items-center gap-2">
+                                    {mainIcon}
+                                    <p>{itemLabel}</p>
+                                </div>
                                 <RotatingIcon open={isOpen} />
                             </div>
+
                         </SidebarMenuButton>
                     </CollapsibleTrigger>
                 </SidebarMenuItem>

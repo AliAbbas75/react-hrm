@@ -13,6 +13,7 @@ const Leaves = React.lazy(()=>import("@/pages/leaves"))
 const LoginPage = React.lazy(()=>import("@/pages/LoginPage"))
 const Department = React.lazy(()=>import("@/pages/departments"))
 const EmployeesPage = React.lazy(() => import("@/pages/employeePage"));
+const NotFound = React.lazy(()=>import("@/pages/NotFoundPage"));
 // import { Button, buttonVariants } from '@/components/ui/button'
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path='/employees' element= {<EmployeesPage/>} />
         <Route path='/designation' element= {<Designation/>} />
         <Route path= '/test' element= {<></>}/>
+        <Route path= "*" element = {<NotFound/>}/>
       </Routes>
     
     </>

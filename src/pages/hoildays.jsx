@@ -16,70 +16,32 @@ import {
     SidebarProvider,
 } from "@/components/ui/sidebar"
 import { SiteHeader } from "@/components/site-header";
+import Calendar from "@/components/calendar/Calendar";
 
 function Holidays() {
-    const [currentMonth, setCurrentMonth] = useState(0);
-    const [selectedMonth, setSelectedMonth] = useState(0);
-
-    useEffect(() => {
-        setCurrentMonth(selectedMonth);
-    }, [selectedMonth])
-
-    const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
+    
     return (
         <>
-            <SidebarProvider
-                            className="flex h-screen w-full"
-                            defaultOpen
-                            defaultInsetOpen
-                        >
-                            {/* Sidebar */}
-                            <AppSidebar />
-            
-                            {/* Main Content */}
-                            <div className="flex flex-col flex-1">
-            
-            
-                                <SiteHeader>
-                                </SiteHeader>
-            
-                                <SidebarInset className="flex flex-col border border-border rounded-3xl bg-background">
-                                    <div className='px-10 py-2'>
-                                        <DynamicBreadcrumb />
-                                    </div>
-                    <div className="flex items-center justify-between p-4">
-                        <DropdownMenu>
-                            <DropdownMenuTrigger className="w-auto">
-                                Month:  {months[parseInt(currentMonth)] ?? "Select Month"}
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56">
-                                <DropdownMenuRadioGroup
-                                    value={currentMonth}
-                                    onValueChange={(value) => setSelectedMonth(parseInt(value))}
-                                >
-                                    {months.map((monthName, index) => (
-                                        <DropdownMenuRadioItem key={index} value={String(index)}>
-                                            {monthName}
-                                        </DropdownMenuRadioItem>
-                                    ))}
-                                </DropdownMenuRadioGroup>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
-
-                    <HolidayTable selectedMonth={currentMonth} />
-                </SidebarInset>
-                </div>
-            </SidebarProvider>
-
-
-
-
-
-
+        <SidebarProvider
+            className="flex h-screen w-full"
+            defaultOpen
+            defaultInsetOpen>
+                        {/* Sidebar */}
+                        <AppSidebar />
+                        {/* Main Content */}
+                        <div className="flex flex-col flex-1">
+                            <SiteHeader>
+                            </SiteHeader>
+                            <SidebarInset className="flex flex-col border border-border rounded-3xl bg-background">
+                                <div className='px-10 py-2'>
+                                    <DynamicBreadcrumb />
+                                </div>
+            </SidebarInset>
+                                <div className=" w-auto m-10">
+                                    <Calendar></Calendar>
+                                </div>
+            </div>
+        </SidebarProvider>
         </>
 
 
@@ -87,3 +49,28 @@ function Holidays() {
     );
 }
 export default Holidays;
+
+
+// 
+//                     <div className="flex items-center justify-between p-4">
+                        
+//                     </div>
+
+//                     <HolidayTable selectedMonth={currentMonth} />
+//                 </SidebarInset>
+//                 </div>
+//             </SidebarProvider>
+
+
+
+// const [currentMonth, setCurrentMonth] = useState(0);
+//     const [selectedMonth, setSelectedMonth] = useState(0);
+
+//     useEffect(() => {
+//         setCurrentMonth(selectedMonth);
+//     }, [selectedMonth])
+
+//     const months = [
+//         "January", "February", "March", "April", "May", "June",
+//         "July", "August", "September", "October", "November", "December"
+//     ];

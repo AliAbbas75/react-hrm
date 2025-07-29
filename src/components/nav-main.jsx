@@ -1,16 +1,15 @@
-import { Icon3dCubeSphere, IconCirclePlusFilled, IconMail, IconUserBolt, IconCube3dSphere } from "@tabler/icons-react";
-import { ChevronDown } from "lucide-react";
+import {  IconCirclePlusFilled, IconMail, IconUserBolt, IconCube3dSphere } from "@tabler/icons-react";
+import {  BadgeDollarSignIcon, LayoutListIcon,MonitorIcon,User2Icon,Building2Icon,ShieldUserIcon,ShieldAlertIcon,AlertOctagonIcon } from "lucide-react";
 import { Button } from "@/components/ui/button"
+import CollapsibleNavItem from "@/components/collapsible-nav-item";
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarGroupLabel,
 } from "@/components/ui/sidebar"
 import { Link } from "react-router-dom";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 export function NavMain({
   items,
@@ -48,61 +47,83 @@ export function NavMain({
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
-        <Collapsible>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <CollapsibleTrigger asChild>
-                <SidebarMenuButton asChild>
-                  <div className="flex items-center justify-between ml-0 w-full">
-                    <div className="flex items-center gap-2">
-                      <IconMail className="h-4 w-4" />
-                      <span>Employee</span>
-                    </div>
-                    <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
-                  </div>
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-            </SidebarMenuItem>
-            <CollapsibleContent>
-
-              <SidebarMenuItem>
-                <Link to={"/employees"}>
-                  <SidebarMenuButton asChild>
-                    <div className="flex flex-row gap-2 w-full">
-                      <IconCube3dSphere />
-                      <span>Employees</span>
-                    </div>
-                  </SidebarMenuButton>
-                </Link>
-              </SidebarMenuItem>
-
-              <SidebarMenuItem>
-                <Link to={"/department"}>
-                  <SidebarMenuButton asChild>
-                    <div className="flex flex-row gap-2 w-full">
-                      <IconUserBolt />
-                      <span>Dept</span>
-                    </div>
-                  </SidebarMenuButton>
-                </Link>
-              </SidebarMenuItem>
-
-              <SidebarMenuItem>
-                <Link to={"/designation"}>
-                  <SidebarMenuButton asChild>
-                    <div className="flex flex-row gap-2 w-full">
-                      <IconCube3dSphere />
-                      <span>Designation</span>
-                    </div>
-                  </SidebarMenuButton>
-                </Link>
-              </SidebarMenuItem>
-
-            </CollapsibleContent>
-          </SidebarMenu>
-        </Collapsible>
+        
+        <CollapsibleNavItem
+            itemLabel={"Assets"} mainIcon = {<MonitorIcon/>}
+            subItem={[
+              { link: "/", icon: <BadgeDollarSignIcon />, title: 'Asset Type' },
+              { link: "/assets", icon: <LayoutListIcon />, title: 'Asset Details' }
+            ]} />
+        
+        <CollapsibleNavItem
+            itemLabel={"OffBoardings"} mainIcon = {<ShieldAlertIcon/>}
+            subItem={[
+              { link: "/warnings", icon: <AlertOctagonIcon />, title: 'Warnings' },
+              { link: "/resignations", icon: <LayoutListIcon />, title: 'Resignations' }
+            ]} />
+          
+          {/* {Always Pass the array of object in order that you want the subItem to appear in} */}
+          <CollapsibleNavItem
+            itemLabel={"Employees"} mainIcon = {<User2Icon/>}
+            subItem={[
+              { link: "/designation", icon: <ShieldUserIcon />, title: 'Designations' },
+              { link: "/department", icon: <Building2Icon />, title: 'Departments' }
+            ]} />
+            
       </SidebarGroupContent>
     </SidebarGroup>
 
   );
 }
+
+
+
+// <SidebarMenu>
+//             <SidebarMenuItem>
+//               <CollapsibleTrigger asChild>
+//                 <SidebarMenuButton asChild>
+//                   <div className="flex items-center gap-2 w-full">
+//                     <IconMail className="h-4 w-4" />
+//                     <p className="mr-10">Employee</p>
+//                     <RotatingIcon className="mr-0" />
+//                   </div>
+//                 </SidebarMenuButton>
+//               </CollapsibleTrigger>
+//             </SidebarMenuItem>
+//             <CollapsibleContent>
+
+//               <SidebarMenuItem>
+//                 <Link to={"/employees"}>
+//                   <SidebarMenuButton asChild>
+//                     <div className="flex flex-row gap-2 w-full">
+//                       <IconCube3dSphere />
+//                       <span>Employees</span>
+//                     </div>
+//                   </SidebarMenuButton>
+//                 </Link>
+//               </SidebarMenuItem>
+
+//               <SidebarMenuItem>
+//                 <Link to={"/department"}>
+//                   <SidebarMenuButton asChild>
+//                     <div className="flex flex-row gap-2 w-full">
+//                       <IconUserBolt />
+//                       <span>Dept</span>
+//                     </div>
+//                   </SidebarMenuButton>
+//                 </Link>
+//               </SidebarMenuItem>
+
+//               <SidebarMenuItem>
+//                 <Link to={"/designation"}>
+//                   <SidebarMenuButton asChild>
+//                     <div className="flex flex-row gap-2 w-full">
+//                       <IconCube3dSphere />
+//                       <span>Designation</span>
+//                     </div>
+//                   </SidebarMenuButton>
+//                 </Link>
+//               </SidebarMenuItem>
+
+//             </CollapsibleContent>
+//           </SidebarMenu>

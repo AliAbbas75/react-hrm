@@ -26,20 +26,20 @@ function Holidays() {
             className="flex h-screen w-full"
             defaultOpen
             defaultInsetOpen>
-                        {/* Sidebar */}
-                        <AppSidebar />
-                        {/* Main Content */}
-                        <div className="flex flex-col flex-1">
-                            <SiteHeader>
-                            </SiteHeader>
-                            <SidebarInset className="flex flex-col border border-border rounded-3xl bg-background">
-                                <div className='px-10 py-2'>
-                                    <DynamicBreadcrumb />
-                                </div>
+            {/* Sidebar */}
+            <AppSidebar />
+            {/* Main Content */}
+            <div className="flex flex-col flex-1">
+                <SiteHeader>
+                </SiteHeader>
+            <SidebarInset className="flex flex-col border border-border rounded-3xl bg-background">
+                <div className='px-10 py-2'>
+                    <DynamicBreadcrumb />
+                </div>
+                <div className=" w-auto m-10">
+                    <Calendar></Calendar>
+                </div>
             </SidebarInset>
-                                <div className=" w-auto m-10">
-                                    <Calendar></Calendar>
-                                </div>
             </div>
         </SidebarProvider>
         </>
